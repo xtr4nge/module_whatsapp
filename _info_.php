@@ -1,6 +1,6 @@
 <?
 $mod_name="whatsapp";
-$mod_version="1.0";
+$mod_version="1.1";
 $mod_path="/usr/share/FruityWifi/www/modules/whatsapp";
 $mod_logs="/usr/share/FruityWifi/logs/whatsapp.log"; 
 $mod_logs_history="$mod_path/includes/logs/";
