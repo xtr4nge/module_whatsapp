@@ -1,6 +1,6 @@
 <? 
 /*
-	Copyright (C) 2013-2014  xtr4nge [_AT_] gmail.com
+	Copyright (C) 2013-2014 xtr4nge [_AT_] gmail.com
 
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -18,9 +18,9 @@
 ?>
 <?
 //include "../login_check.php";
+include "../../../config/config.php";
 include "../_info_.php";
-include "/usr/share/FruityWifi/www/config/config.php";
-include "/usr/share/FruityWifi/www/functions.php";
+include "../../../functions.php";
 
 // Checking POST & GET variables...
 if ($regex == 1) {
@@ -42,10 +42,12 @@ if($service != "") {
         // COPY LOG
         if ( 0 < filesize( $mod_logs ) ) {
             $exec = "$bin_cp $mod_logs $mod_logs_history/".gmdate("Ymd-H-i-s").".log";
-            exec("$bin_danger \"$exec\"" );
+            //exec("$bin_danger \"$exec\"" ); //DEPRECATED
+            exec_fruitywifi($exec);
             
             $exec = "$bin_echo '' > $mod_logs";
-            exec("$bin_danger \"$exec\"" );
+            //exec("$bin_danger \"$exec\"" ); //DEPRECATED
+            exec_fruitywifi($exec);
         }
 
         // CHECK ROUTE
@@ -53,24 +55,29 @@ if($service != "") {
         $ifRouteOn = exec($exec);
         if ($ifRouteOn == "") {
             $exec = "$bin_route add default gw $io_in_ip";
-            exec("$bin_danger \"$exec\"" );
+            //exec("$bin_danger \"$exec\"" ); //DEPRECATED
+            exec_fruitywifi($exec);
         }
         
-		$exec = "./whatsapp_discover -i $io_action -l /usr/share/FruityWifi/logs/whatsapp.log > /dev/null 2 &";
-        exec("$bin_danger \"$exec\"" );
+		$exec = "./whatsapp_discover -i $io_action -l /usr/share/fruitywifi/logs/whatsapp.log > /dev/null 2 &";
+        //exec("$bin_danger \"$exec\"" ); //DEPRECATED
+        exec_fruitywifi($exec);
         
     } else if($action == "stop") {
         // STOP MODULE
         $exec = "$bin_killall -9 whatsapp_discover";
-        exec("$bin_danger \"$exec\"" );
+        //exec("$bin_danger \"$exec\"" ); //DEPRECATED
+        exec_fruitywifi($exec);
         
         // COPY LOG
         if ( 0 < filesize( $mod_logs ) ) {
             $exec = "$bin_cp $mod_logs $mod_logs_history/".gmdate("Ymd-H-i-s").".log";
-            exec("$bin_danger \"$exec\"" );
+            //exec("$bin_danger \"$exec\"" ); //DEPRECATED
+            exec_fruitywifi($exec);
             
             $exec = "$bin_echo '' > $mod_logs";
-            exec("$bin_danger \"$exec\"" );
+            //exec("$bin_danger \"$exec\"" ); //DEPRECATED
+            exec_fruitywifi($exec);
         }
 
     }
@@ -80,10 +87,12 @@ if($service != "") {
 if ($install == "install_$mod_name") {
 
     $exec = "chmod 755 install.sh";
-    exec("$bin_danger \"$exec\"" );
+    //exec("$bin_danger \"$exec\"" ); //DEPRECATED
+    exec_fruitywifi($exec);
 
-    $exec = "$bin_sudo ./install.sh > /usr/share/FruityWifi/logs/install.txt &";
-    exec("$bin_danger \"$exec\"" );
+    $exec = "$bin_sudo ./install.sh > $log_path/install.txt &";
+    //exec("$bin_danger \"$exec\"" ); //DEPRECATED
+    exec_fruitywifi($exec);
 
     header('Location: ../../install.php?module='.$mod_name);
     exit;

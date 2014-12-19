@@ -1,6 +1,6 @@
 <? 
 /*
-    Copyright (C) 2013-2014  xtr4nge [_AT_] gmail.com
+    Copyright (C) 2013-2014 xtr4nge [_AT_] gmail.com
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -44,9 +44,9 @@ $(function() {
 
 <?
 
-include "_info_.php";
 include "../../config/config.php";
 include "../../login_check.php";
+include "_info_.php";
 include "../../functions.php";
 
 // Checking POST & GET variables...
@@ -66,7 +66,8 @@ $service = $_POST["service"];
 // DELETE LOG
 if ($logfile != "" and $action == "delete") {
     $exec = "$bin_rm ".$mod_logs_history.$logfile.".log";
-    exec("$bin_danger \"$exec\"", $dump);
+    //exec("$bin_danger \"$exec\"", $dump); //DEPRECATED
+    exec_fruitywifi($exec);
 }
 
 ?>
